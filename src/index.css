@@ -1,13 +1,16 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html,body {
+  color: #333;
+  font-family: sans-serif;
+  background-color: #fff;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+* {
+  touch-action: none;     /* 阻止任何touch事件的默认行为,防止报错*/
+  box-sizing: border-box;  
+}
+p,h3 {
+  margin: 0;  /* 有默认上下边距 */
+}
+a {
+  color: #333;
 }

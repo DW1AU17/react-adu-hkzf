@@ -1,0 +1,167 @@
+.index {
+  padding-bottom: 50px;
+  // 顶部搜索
+  .search-box {
+    position: absolute;
+    top: 25px;
+    z-index: 1;
+    width: 100%;
+    padding: 0 10px;
+
+    .search-left {
+      flex: 1;
+      height: 34px;
+      padding: 5px 5px 5px 8px;
+      margin: 0 10px;
+      border-radius: 3px;
+      background-color: #fff;
+
+      .location {
+        span {
+          font-size: 14px;
+        }
+
+        .icon-arrow {
+          margin-left: 2px;
+          font-size: 12px;
+          color: #7f7f80;
+        }
+      }
+
+      .search-form {
+        margin-left: 12px;
+        border-left: 1px solid #e5e5e5;
+
+        .icon-seach {
+          vertical-align: middle;
+          padding: 0 2px 0 12px;
+          color: #9c9fa1;
+          font-size: 14px;
+        }
+
+        span {
+          padding-left: 4px;
+          font-size: 13px;
+          color: #9c9fa1;
+        }
+      }
+    }
+
+    .icon-map {
+      font-size: 25px;
+      color: #fff;
+    }
+  }
+  // 导航
+  .nav {
+    padding: 10px 0;
+    text-align: center;
+    img {
+      width: 48px;
+    }
+    p {
+      margin-top: 7px;
+      font-size: 14px;
+    }
+  }
+  // 租房小组
+  .groups {
+    padding: 0 10px;
+    overflow: hidden;
+    background-color: #f6f5f6;
+    &-title {
+      margin: 15px 0 15px 10px;
+      h3 {
+        font-size: 16px;
+      }
+      span {
+        color: #787d82;
+        font-size: 14px;
+      }
+    }
+    .grid {
+      &-item {
+        padding: 0 13px;
+        p {
+          margin-bottom: 5px;
+          font-weight: bold;
+          font-size: 13px;
+        }
+        img {
+          width: 55px;
+        }
+        span {
+          font-size: 12px;
+          color: #999;
+        }
+      }
+      .am-flexbox-item .am-grid-item-content {
+        padding: 8px 0;
+      }
+      .am-flexbox {
+        background-color: transparent;
+      }
+      .am-grid-item {
+        height: 85px;
+        margin-bottom: 10px;
+        background-color: #fff;
+      }
+      .am-grid-item:first-child {
+        margin-right: 10px;
+      }
+    }
+  }
+  // 最新资讯：
+  .news {
+    padding: 10px;
+    background-color: #fff;
+    overflow: hidden;
+
+    .group-title {
+      margin: 10px 0 5px 10px;
+      font-size: 15px;
+    }
+
+    .news-item {
+      height: 120px;
+      padding: 15px 10px 15px 0;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .news-item:last-child {
+      border: 0;
+    }
+
+    .imgwrap {
+      float: left;
+      height: 90px;
+      width: 120px;
+    }
+
+    img {
+      height: 90px;
+      width: 120px;
+    }
+
+    .content {
+      overflow: hidden;
+      height: 100%;
+      padding-left: 12px;
+    }
+
+    .title {
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .info {
+      width: 100%;
+      color: #9c9fa1;
+      font-size: 12px;
+    }
+
+    .message-title {
+      margin-bottom: 48px;
+    }
+  }
+}
