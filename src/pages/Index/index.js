@@ -10,13 +10,17 @@ import nav2 from "../../assets/images/nav-2.png";
 import nav3 from "../../assets/images/nav-3.png";
 import nav4 from "../../assets/images/nav-4.png";
 
+// BMap 是全局对象
+const BMap = window.BMap;
+
 export default class Index extends Component {
   state = {
     groups: [], // 租房小组数据
     swiper: [], // 轮播图数据
     news: [],   // 资讯数据 
     imgHeight: 212,
-    isSwiperLoading: true // 判断数据是否已获得
+    isSwiperLoading: true, // 判断数据是否已获得
+    cityName: "上海"  // 当前城市默认上海
   };
 
   // 获取轮播图数据
@@ -46,6 +50,32 @@ export default class Index extends Component {
     this.getSwipers()
     this.getGroups()
     this.getNews()
+
+    // 通过百度地图获取当前城市信息 / BMap是全局对象, 所以要window.BMap
+    const myCity = new BMap.LocalCity();
+    myCity.get(async result => {
+      // 1.获取当前城市的名字
+      var cityName = result.name;
+      // 2.根据名字获取当前城市的信息
+      // const res = await axios.get(`http://localhost:8080/area/info?name=${cityName}`)    // 推荐使用下面
+      const res = await axios.get("http://localhost:8080/area/info",{
+        params: {name: cityName}
+      })
+      // 3. 把城市信息存到localstorage中,(并把城市名字存到state中)
+      const { label, value } = res.data.body
+      this.setState({
+        cityName: label
+      })
+      localStorage.setItem("city_info", JSON.stringify({label, value}))
+
+    });
+
+
+    // 使用 H5 中地理位置API
+    // postion 对象中，常用属性的文档：
+    // navigator.geolocation.getCurrentPosition(position => {
+    //   console.log("current location info:", position)
+    // })
   }
 
   // 渲染轮播图
@@ -103,7 +133,7 @@ export default class Index extends Component {
                 className="location"
                 onClick={() => this.props.history.push("/citylist")}
               >
-                <span>上海</span>
+                <span>{this.state.cityName}</span>
                 <i className="iconfont icon-arrow" />
               </div>
               <div 
