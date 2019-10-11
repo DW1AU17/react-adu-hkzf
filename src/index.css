@@ -21,3 +21,6 @@ p,h3 {
 a {
   color: #333;
 }
+ul {
+  list-style: none;
+}

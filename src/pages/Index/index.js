@@ -4,14 +4,15 @@ import { Link } from "react-router-dom";
 // 使用axios
 import axios from "axios";
 import "./index.scss";
+// 获取当前城市工具
+import { getCurrentCity } from '../../utils'
+
 // 本地图片一定要引入后才能使用
 import nav1 from "../../assets/images/nav-1.png";
 import nav2 from "../../assets/images/nav-2.png";
 import nav3 from "../../assets/images/nav-3.png";
 import nav4 from "../../assets/images/nav-4.png";
 
-// BMap 是全局对象
-const BMap = window.BMap;
 
 export default class Index extends Component {
   state = {
@@ -46,30 +47,15 @@ export default class Index extends Component {
     });
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.getSwipers()
     this.getGroups()
     this.getNews()
 
-    // 通过百度地图获取当前城市信息 / BMap是全局对象, 所以要window.BMap
-    const myCity = new BMap.LocalCity();
-    myCity.get(async result => {
-      // 1.获取当前城市的名字
-      var cityName = result.name;
-      // 2.根据名字获取当前城市的信息
-      // const res = await axios.get(`http://localhost:8080/area/info?name=${cityName}`)    // 推荐使用下面
-      const res = await axios.get("http://localhost:8080/area/info",{
-        params: {name: cityName}
-      })
-      // 3. 把城市信息存到localstorage中,(并把城市名字存到state中)
-      const { label, value } = res.data.body
-      this.setState({
-        cityName: label
-      })
-      localStorage.setItem("city_info", JSON.stringify({label, value}))
-
-    });
-
+    let { label } = await getCurrentCity()
+    this.setState({
+      cityName: label
+    })
 
     // 使用 H5 中地理位置API
     // postion 对象中，常用属性的文档：
