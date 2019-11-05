@@ -15,8 +15,11 @@ body,
   touch-action: none;     /* 阻止任何touch事件的默认行为,防止报错*/
   box-sizing: border-box;  
 }
-p,h3 {
+p,h3,h1,dd,ul {
   margin: 0;  /* 有默认上下边距 */
+}
+ul {
+  padding: 0;
 }
 a {
   color: #333;

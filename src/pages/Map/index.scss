@@ -1,4 +1,15 @@
+.map {
+  padding-top: 45px;
+}
+
 .map,
 .container {
   height: 100%;
+}
+/* 房屋列表项样式 */
+.houseItems {
+  padding: 0 10px;
+  overflow-y: auto;
+  height: 100%;
+  padding-bottom: 45px;
 }

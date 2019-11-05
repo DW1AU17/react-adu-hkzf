@@ -1,11 +1,14 @@
 import React from "react";
-import { NavBar } from 'antd-mobile';
 import axios from 'axios';
 import './index.scss';
 // 获取当前城市方法
-import { getCurrentCity } from '../../utils';
+import { getCurrentCity, setCity } from '../../utils';
 // react-virtualized 组件 ( 文档中找到list组件 )
 import { List , AutoSizer} from 'react-virtualized'
+// 遮罩层
+import { Toast } from 'antd-mobile'
+// 引入公共头部样式
+import NavHeader from '../../components/NavHeader'
 
 // 当点击城市时候需要把城市存到localstorage中 并把返回index页面
 
@@ -69,6 +72,8 @@ const formatCityIndex = letter => {
 // 索引高度，城市高度
 const INDEX_HEIGHT = 36
 const CITY_HEIGHT = 50
+// 有房源的城市列表
+const CITY_HAS_HOUSE = ['北京', '上海', '广州', '深圳']
 
 export default class CityList extends React.Component {
   state = {
@@ -108,6 +113,19 @@ export default class CityList extends React.Component {
     // 要等到列表渲染完再调用, 所以给获取城市加上 await
     this.listRef.current.measureAllRows()
   }
+  // 切换当前城市
+  changeCity = ({label, value}) => {
+    // 目前只有4个城市有房源
+    if(CITY_HAS_HOUSE.indexOf(label) !== -1) {  // 获取位置,没有就是 -1
+      // 存到本地中
+      setCity({label, value})
+      // 返回上一页
+      this.props.history.go(-1)
+    }else {
+      // 遮罩层 Toast组件
+      Toast.info('该城市暂无房源数据', 1, null, false)
+    }
+  }
 
   // 渲染每一项
   rowRenderer = ({key, index, style}) => {
@@ -124,7 +142,7 @@ export default class CityList extends React.Component {
         <div className="title">{formatCityIndex(letter)}</div>
         {/* 4. 遍历数组 */}
         {list.map(item => (
-          <div key={item.value} className="name">
+          <div key={item.value} className="name" onClick={() => this.changeCity(item)}>
             {item.label}
           </div>
         ))}
@@ -181,21 +199,15 @@ export default class CityList extends React.Component {
     if (startIndex !== this.state.activeIndex) {
       this.setState({
         activeIndex: startIndex
-      })
+      }) 
     }
   }
 
   render() {
     return (
       <div className="citylist">
-        <NavBar
-          className="navbar"
-          mode="light"
-          icon={<i className="iconfont icon-back" />}
-          onLeftClick={() => console.log("onLeftClick")}
-        >
-          城市选择
-        </NavBar>
+        {/* 封装的组件中则通过props.children获得 */}
+        <NavHeader>城市列表</NavHeader>
         {/* 城市列表 */}
         {/* 1. 让宽高占满， 需要用到高阶组件 AutoSizer  */}
         <AutoSizer>

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Carousel, Flex, Grid, WingBlank} from "antd-mobile";
 import { Link } from "react-router-dom";
+// 公共头部search
+import SearchHeader from '../../components/SearchHeader';
 // 使用axios
 import axios from "axios";
 import "./index.scss";
@@ -113,29 +115,7 @@ export default class Index extends Component {
         {/* 轮播图 */}
         <div className="swiper">
           {/* 顶部搜索导航 */}
-          <Flex className="search-box">
-            <Flex className="search-left">
-              <div 
-                className="location"
-                onClick={() => this.props.history.push("/citylist")}
-              >
-                <span>{this.state.cityName}</span>
-                <i className="iconfont icon-arrow" />
-              </div>
-              <div 
-                className="search-form"
-                onClick={() => this.props.history.push("/search")}  
-              >
-                <i className="iconfont icon-seach" />
-                <span>请输入小区或地址</span>
-              </div>
-            </Flex>
-            <i 
-              className="iconfont icon-map" 
-              onClick={() => this.props.history.push("/map")}
-            />
-          </Flex>
-
+          <SearchHeader cityName={this.state.cityName}></SearchHeader>
           {/* 问题: 轮播图不自动轮播 (因为state.swiper中缺少数据)
               解决: 当swiper数组中有数据后再渲染轮播图 (设置isSwiperLoading)  */}
           {/* 当有数据后渲染轮播图, 解决轮播图不自动轮播问题 */}
