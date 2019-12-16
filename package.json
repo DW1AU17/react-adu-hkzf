@@ -5,6 +5,7 @@
   "dependencies": {
     "antd-mobile": "^2.3.1",
     "axios": "^0.19.0",
+    "babel-plugin-import": "^1.12.2",
     "classnames": "^2.2.6",
     "formik": "^2.0.3",
     "lodash": "^4.17.15",
@@ -19,9 +20,9 @@
     "yup": "^0.27.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -38,5 +39,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "customize-cra": "^0.8.0",
+    "react-app-rewired": "^2.1.4"
   }
 }

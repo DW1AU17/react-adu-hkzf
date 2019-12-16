@@ -21,7 +21,7 @@ function SearchHeader({history, cityName, className}) {
         </div>
         <div
           className={styles.searchForm}
-          onClick={() => history.push("/search")}
+          onClick={() => history.push("/rent/search")}
         >
           <i className="iconfont icon-seach" />
           <span>请输入小区或地址</span>

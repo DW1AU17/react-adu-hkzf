@@ -107,6 +107,7 @@ export default class CityList extends React.Component {
   }
 
   async componentDidMount() {
+    console.log("执行了钩子")
     await this.getCityList();  // 获取所有城市
 
     // 调用list实例上的measureAllRows方法,提前计算每一行高度, 弥补scrollToRow方法的不足 ( 但是比较耗性能 )
@@ -129,6 +130,7 @@ export default class CityList extends React.Component {
 
   // 渲染每一项
   rowRenderer = ({key, index, style}) => {
+    console.log("执行了渲染")
     // 1. 索引只有一个， 城市名可能有多个 ( 索引下的城市，需要遍历获取 )
     const { cityList, cityIndex } = this.state
     // 2. 字母索引

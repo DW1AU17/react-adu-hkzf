@@ -1,14 +1,15 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Route } from "react-router-dom";
-// 引入组件
-import HouseList from "../HouseList";
-import News from "../News";
-import Profile from "../Profile";
-import Index from "../Index";
 // 引入 tabBar 组件
 import { TabBar } from "antd-mobile";
 // import "./index.scss";
 import './index.scss'
+// 引入组件
+import Index from "../Index";
+const HouseList = lazy(() => import( "../HouseList"))
+const News = lazy(() => import( "../News"))
+const Profile = lazy(() => import( "../Profile"))
+
 
 // tab的菜单数据
 const HOMELIST = [
@@ -57,22 +58,24 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <div className="home"> 
-        {/* 去掉了index, 是为了在localhost:3000/home时 默认访问 localhost:3000/home/index; 需精确匹配 */}
-        <Route exact path="/home" component={Index} />
-        <Route path="/home/houselist" component={HouseList} />
-        <Route path="/home/news" component={News} />
-        <Route path="/home/mine" component={Profile} />
+      <Suspense>
+        <div className="home" fallback={<div>Loading...</div>}> 
+          {/* 去掉了index, 是为了在localhost:3000/home时 默认访问 localhost:3000/home/index; 需精确匹配 */}
+          <Route exact path="/home" component={Index} />
+          <Route path="/home/houselist" component={HouseList} />
+          <Route path="/home/news" component={News} />
+          <Route path="/home/mine" component={Profile} />
 
-        {/* tabBar 组件 */}
-        <div className="tab-bar">
-          {/* noRenderContent 不渲染内容部分 (默认展示tabBar页面是通过类似轮播图的形式,我们用的是单页面所以不需要) */}
-          <TabBar tintColor="#21B97A" noRenderContent >
-            {/* 调用 tabBar 渲染函数 */}
-            {this.renderTabBarItems()}
-          </TabBar>
+          {/* tabBar 组件 */}
+          <div className="tab-bar">
+            {/* noRenderContent 不渲染内容部分 (默认展示tabBar页面是通过类似轮播图的形式,我们用的是单页面所以不需要) */}
+            <TabBar tintColor="#21B97A" noRenderContent >
+              {/* 调用 tabBar 渲染函数 */}
+              {this.renderTabBarItems()}
+            </TabBar>
+          </div>
         </div>
-      </div>
+      </Suspense>
     );
   }
 }
